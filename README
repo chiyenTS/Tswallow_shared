@@ -2,3 +2,4 @@
 
 022319 submit ts_assembly.sh for test run 2 hr, 1 TB ram
 0224-ts_assembly.sh testrun MaxRSS 10548320K in 30 mins
+022419 ts_assembly.sh: start real run for 6days
