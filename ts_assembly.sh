@@ -3,7 +3,7 @@
 #SBATCH -J tsgenome_assembly
 #SBATCH -D /pylon5/mc5fs2p/chiyents/tsgenome/data/raw
 #SBATCH -o /pylon5/mc5fs2p/chiyents/tsgenome/scripts/assembly/ts_assembly-%j.o
-#SBATCH -e /pylon5/mc5fs2p/chiyents/tsgenome/scripts/assembly/ts_assembly-%j.o
+#SBATCH -e /pylon5/mc5fs2p/chiyents/tsgenome/scripts/assembly/ts_assembly-%j.e
 #SBATCH -N 1
 #SBATCH -p LM
 #SBATCH -t 0:30:00
