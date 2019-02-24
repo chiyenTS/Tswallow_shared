@@ -1,3 +1,4 @@
 022219 ts_assembly.sh as supernova script for tswallow genome assembly 
 
 022319 submit ts_assembly.sh for test run 2 hr, 1 TB ram
+0224-ts_assembly.sh testrun MaxRSS 10548320K in 30 mins
