@@ -15,4 +15,4 @@ supernova run \
 --id tsgenome1 \
 --maxreads 485000000 \
 --fastqs /pylon5/mc5fs2p/chiyents/tsgenome/data/raw \
--ssembly.sh-localcores=28
+--localcores=28
