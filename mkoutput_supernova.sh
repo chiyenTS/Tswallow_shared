@@ -4,8 +4,8 @@
 #SBATCH --job-name=mkoutput_supernova # Job name
 #SBATCH --nodes=1
 #SBATCH --time=1-0
-#SBATCH --ntasks=8 # Number of cores
-#SBATCH --mem=120000 # Memory pool for all cores (see also --mem-per-cpu)
+#SBATCH --ntasks=20 # Number of cores
+#SBATCH --mem=80000 # Memory pool for all cores (see also --mem-per-cpu)
 #SBATCH --output=/pylon5/mc5fs2p/chiyents/tsgenome/scripts/assembly/mkoutput_supernova-%N-%j.out # File to which STDOUT will be written
 #SBATCH --error=/pylon5/mc5fs2p/chiyents/tsgenome/scripts/assembly/mkoutput_supernova-%N-%j.err # File to which STDERR will be written
 #SBATCH --mail-type=ALL # Type of email notification- BEGIN,END,FAIL,ALL
