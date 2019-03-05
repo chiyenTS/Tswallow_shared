@@ -1,4 +1,11 @@
 022219 ts_assembly.sh as supernova script for tswallow genome assembly 
 
 022319 submit ts_assembly.sh for test run 2 hr, 1 TB ram
+
+0224-ts_assembly.sh testrun MaxRSS 10548320K in 30 mins
+
+022419 ts_assembly.sh: start real run for 6days
+
 030519 mkoutput_supernova.sh added into repo for mkoutput_supernova asking 120G ram and 1 day of run time, first trying to do pseudohap2
+
+
