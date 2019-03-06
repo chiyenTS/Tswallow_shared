@@ -27,8 +27,8 @@ proc10xPath="proc10xG"
 
 basepath="/pylon5/mc5fs2p/chiyents/tsgenome/data"
 fastqs=${basepath}/raw
-fastq1=${basepath}/Tree_swallow_S2_L003_R1_001.fastq.gz
-fastq2=${basepath}/Tree_swallow_S2_L003_R2_001.fastq.gz
+fastq1=${fastqs}/Tree_swallow_S2_L003_R1_001.fastq.gz
+fastq2=${fastqs}/Tree_swallow_S2_L003_R2_001.fastq.gz
 
 out_path=${basepath}/tswallow_proc_fastq
 mkdir ${out_path}
