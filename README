@@ -9,3 +9,4 @@
 030519 mkoutput_supernova.sh added into repo for mkoutput_supernova asking 120G ram and 1 day of run time, first trying to do pseudohap2
 
 
+030619 start running proc10xG to extract gem barcode, trim primer, compared barcode to white list
