@@ -8,7 +8,7 @@
 #SBATCH --mem=6000 # Memory pool for all cores (see also --mem-per-cpu)
 #SBATCH -p RM-shared
 #SBATCH --output=/pylon5/mc5fs2p/chiyents/tsgenome/scripts/assembly/proc10xG-%N-%j.out # File to which STDOUT will be written
-#SBATCH --output=/pylon5/mc5fs2p/chiyents/tsgenome/scripts/assembly/proc10xG-%N-%j.err # File to which STDERR will be written
+#SBATCH --error=/pylon5/mc5fs2p/chiyents/tsgenome/scripts/assembly/proc10xG-%N-%j.err # File to which STDERR will be written
 #SBATCH --mail-type=ALL # Type of email notification- BEGIN,END,FAIL,ALL
 #SBATCH --mail-user=chi-yen_tseng@baylor.edu # Email to which notifications will be sent
 
