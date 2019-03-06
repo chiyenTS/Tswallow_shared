@@ -3,9 +3,9 @@
 #SBATCH -D /pylon5/mc5fs2p/chiyents/tsgenome/scripts
 #SBATCH --job-name=proc10xG # Job name
 #SBATCH --nodes=1
-#SBATCH --time=20-0
-#SBATCH --ntasks=24 # Number of cores
-#SBATCH --mem=4000 # Memory pool for all cores (see also --mem-per-cpu)
+#SBATCH --time=48:00:00
+#SBATCH --ntasks=28 # Number of cores
+#SBATCH --mem=6000 # Memory pool for all cores (see also --mem-per-cpu)
 #SBATCH -p RM-shared
 #SBATCH --output=/pylon5/mc5fs2p/chiyents/tsgenome/scripts/assembly/proc10xG-%N-%j.out # File to which STDOUT will be written
 #SBATCH --output=/pylon5/mc5fs2p/chiyents/tsgenome/scripts/assembly/proc10xG-%N-%j.err # File to which STDERR will be written
@@ -26,7 +26,7 @@ module load anaconda2
 proc10xPath="proc10xG"
 
 basepath="/pylon5/mc5fs2p/chiyents/tsgenome/data"
-fastqs="/pylon5/mc5fs2p/chiyents/tsgenome/data/raw"
+fastqs=${basepath}/raw
 fastq1=${basepath}/Tree_swallow_S2_L003_R1_001.fastq.gz
 fastq2=${basepath}/Tree_swallow_S2_L003_R2_001.fastq.gz
 
