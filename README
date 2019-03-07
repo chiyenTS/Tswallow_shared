@@ -14,3 +14,8 @@ snail run
 030519 finish mkoutput in 7 mins 
 
 030619 start running proc10xG to extract gem barcode, trim primer, compared barcode to white list
+
+030619 finish proc10xG in < 10 hours and PROCESS BARCODE MATCH: 383244671 (93.90%) PROCESS BARCODE MISMATCH1: 2524728 (0.62%) PROCESS BARCODE AMBIGUOUS: 5288877 (1.30%) PROCESS BARCODE UNKNOWN: 17102415 (4.19%)
+
+
+030719 submit map_barcodes.sh
