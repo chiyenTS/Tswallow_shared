@@ -20,6 +20,6 @@ id=NewFastq
 
 cd /pylon5/mc5fs2p/chiyents/tsgenome/data/raw/
 #code
-$long basic \
+longranger basic \
 --id=$id \
 --fastqs=$path
