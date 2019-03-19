@@ -14,6 +14,7 @@
 module unload python
 module load anaconda3
 module load python3
+module load bedtools bwa samtools
 #Load conda env for tigmint 
 source activate /home/chiyents/.conda/envs/ark-env
 #Load zsh to fix tigmint 
