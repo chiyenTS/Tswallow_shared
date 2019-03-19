@@ -25,20 +25,25 @@ export PATH=/pylon5/mc5fs2p/chiyents/program/links_v1.8.6:$PATH
 export PATH=/pylon5/mc5fs2p/chiyents/program/arks:$PATH
 export PATH=/pylon5/mc5fs2p/chiyents/program/arks/PATH/bin:$PATH
 
-basename="/pylon5/mc5fs2p/chiyents/tsgenome/data"
-draft="supernova_hap1"
-reads="barcoded_reads"
+draft="/pylon5/mc5fs2p/chiyents/tsgenome/data/ark_out/supernova_hap1.fa"
+reads="/pylon5/mc5fs2p/chiyents/tsgenome/data/ark_out/barcoded_reads.fq.gz"
 
-draft_base=${basename}/ark_out/${draft}
-reads_base=${basename}/ark_out/${reads}
+draft_base=$(basename $draft)
+reads_base=$(basename $reads)
 
 export draft_base
 export reads_base
 
+draft_prefix=$(perl -e 'if($ENV{'draft_base'} =~ /(\S+)\.fa/){print "$1";}')
+reads_base=$(perl -e 'if($ENV{'reads_base'} =~ /(\S+)\.f(ast)?q\.gz/){print "$1";}')
 
+echo $draft_prefix
+echo $reads_base
+
+cd /pylon5/mc5fs2p/chiyents/tsgenome/data/ark_out
 ##Running the arks makefile with default parameters (except specify 8 threads, -j 0.5 for ARKS):
 arks-make arks-tigmint \
-draft=${draft_base} \
+draft=${draft_prefix} \
 reads=${reads_base} \
 j=0.5 \
 threads=16 \
