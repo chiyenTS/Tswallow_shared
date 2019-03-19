@@ -16,6 +16,8 @@ module load anaconda3
 module load python3
 #Load conda env for tigmint 
 source activate /home/chiyents/.conda/envs/ark-env
+#Load zsh to fix tigmint 
+export PATH=/home/chiyents/zsh-5.7.1/bin:$PATH
 #Load LINKS
 export PATH=/pylon5/mc5fs2p/chiyents/program/links_v1.8.6:$PATH
 #Load ARKS
