@@ -23,7 +23,7 @@ SORTTHREADS=$(expr ${THREADS} - ${MAPTHREADS})
 hostname
 
 module load bwa/0.7.13
-module load samtools/1.7
+module load samtools/1.9
 module load anaconda2
 proc10xPath="proc10xG"
 
