@@ -19,3 +19,121 @@ snail run
 
 
 030719 submit map_barcodes.sh
+030719 use interactive session ##bwa index tswallow_supernova.pseudohap2.1.fasta.gz## to make index file for tswallow_supernova.pseudohap2.1.fasta.gz
+
+031319 finish fastqbasic.sh to interleave fasta files in about 11 hours using 80GB and 20 cores. 
+
+031419 install ark program in $SCRATCH/program/ark by 1. git clone https://github.com/bcgsc/arks.git 2. create arc-env in anaconda3/ python3 environment and install 
+
+~ ]$ module load anaconda3
+~ ]$ conda create arc-env
+~ ]$ source activate arc-env
+~ ]$ conda install -c bioconda google-sparsehash ## (https://github.com/bcgsc/arks/issues/9)
+~ ]$ export CPPFLAGS='-I/home/chiyents/.conda/envs/ark-env/include' ## to allow compiling (https://askubuntu.com/questions/386315/how-to-add-libraries-path-to-the-configure-command) 
+$SCRATCH/program/ark ]$ ./configure --prefix=$SCRATCH/program/ark && make install 
+$SCRATCH/tsgenome/data/tswallow_supernova_outs]$ gzip -d tswallow_supernova.pseudohap2.1.fasta.gz > tswallow_supernova.pseudohap2.1.fa  ## decompress tswallow haploid 1 for running ark
+$SCRATCH/tsgenome/data/tswallow_supernova_outs]$ ln -s /home/chiyents/myfolder/tsgenome/data/tswallow_supernova_outs/tswallow_supernova.pseudohap2.1.fasta /home/chiyents/myfolder/tsgenome/data/ark_out/
+$SCRATCH/tsgenome/data/tswallow_supernova_outs]$ ln -s /home/chiyents/myfolder/tsgenome/data/raw/NewFastq/outs/barcoded.fastq.gz /home/chiyents/myfolder/tsgenome/data/ark_out/
+
+
+031919 - 032419 preparing tigmint-arks-links run and installation
+## install tigmint 
+$ module unload python
+$ module load python3.5
+## create virtualenv in your desired location
+program/venv]$ python3 -m virtualenv tigmint-env
+
+## important: export PYTHONPATH to your local python3 environment 
+export PYTHONPATH=/pylon5/mc5fs2p/chiyents/program/venv/tigmint-env/lib/python3.5/site-packages:$PYTHONPATH
+export PATH=/pylon5/mc5fs2p/chiyents/program/venv/tigmint-env/bin:$PATH
+
+## activate your python3 environment 
+source /pylon5/mc5fs2p/chiyents/program/venv/tigmint-env/bin/activate
+
+## then you can upgrade pip 
+$python3 -m pip install --upgrade pip
+$python3 -m pip --version
+
+## install tigmint 
+$pip3 install tigmint
+
+## install tigmint dependencies
+$pip3 install intervaltree pybedtools pysam statistics
+
+cd 
+## important: you need to upgrade zsh version to run tigmint 
+## zsh needs to be build separetely in Bridges 
+# building zsh (kindly provided by Roberto Gomez from XSEDES)
+#
+ mkdir -p $SCRATCH/src
+ cd $SCRATCH/src
+ wget http://www.zsh.org/pub/zsh-5.7.1.tar.xz
+ tar xf zsh-5.7.1.tar.xz 
+ cd zsh-5.7.1
+ ./configure --prefix=$HOME/zsh-5.7.1
+ make install
+
+# put this in your ~/.bashrc
+#
+export PATH=$HOME/zsh-5.7.1/bin:$PATH
+
+# check: zsh
+#
+ zsh --version
+[joeuser@login018 ~]$ zsh --version
+zsh 5.7.1 (x86_64-pc-linux-gnu)
+
+## install LINKS (https://github.com/bcgsc/LINKS)
+program]$ wget http://www.bcgsc.ca/platform/bioinfo/software/links/releases/1.8.6/links_v1-8-6.tar.gz
+program]$ tar -xvf links_v1-8-6.tar
+program/links_v1.8.6/lib/bloomfilter/swig]$ 
+
+## TO BUILD a Perl5 module (run in swig/):
+$ module load swig/3.0.8 
+program/links_v1.8.6/lib/bloomfilter/swig]$ preinst-swig -Wall -c++ -perl5 BloomFilter.i
+program/links_v1.8.6/lib/bloomfilter/swig]$ g++ -c BloomFilter_wrap.cxx -I/usr/lib64/perl5/CORE -fPIC -Dbool=char -O3
+program/links_v1.8.6/lib/bloomfilter/swig]$ g++ -Wall -shared BloomFilter_wrap.o -o BloomFilter.so -O3
+
+## verify installation 
+program/links_v1.8.6/lib/bloomfilter/swig]$ ./test.pl
+
+## Important: you need to change PATH in the following files 
+##CHANGE the path to BloomFilter.pm in 
+## /pylon5/mc5fs2p/chiyents/program/links_v1.8.6/LINKS
+## /pylon5/mc5fs2p/chiyents/program/links_v1.8.6/lib/bloomfilter/swig/writeBloom.pl
+## and /pylon5/mc5fs2p/chiyents/program/links_v1.8.6/lib/bloomfilter/swig/testBloom.pl
+## nano above three files and replace 
+## use lib "$FindBin::Bin/./lib/bloomfilter/swig"; (for LINKS) with $SCRATCH/program/links_v1.8.6/lib/bloomfilter/swig
+## use lib "$FindBin::Bin/../lib/bloomfilter/swig"; (for writeBloom.pl/testBloom.pl) with $SCRATCH/program/links_v1.8.6/lib/bloomfilter/swig
+
+## Important: upgrade bedtools to V2.27.1 for running tigmint (or tigimint cut won't work)
+program]$ wget https://github.com/arq5x/bedtools2/releases/download/v2.27.1/bedtools-2.27.1.tar.gz
+$ tar -zxvf bedtools-2.27.1.tar.gz
+$ cd bedtools2
+$ make
+
+Then you are all set to run tigmint_run.sh
+
+## installing ark 
+
+program]$ git clone https://github.com/bcgsc/arks.git 
+
+2. create anaconda3 environment for compiling ark
+~ ]$ module load anaconda3
+~ ]$ conda create arc-env
+~ ]$ source activate arc-env
+~ ]$ conda install -c bioconda google-sparsehash ## (https://github.com/bcgsc/arks/issues/9)
+~ ]$ export CPPFLAGS='-I/home/chiyents/.conda/envs/ark-env/include' ## to allow compiling (https://askubuntu.com/questions/386315/how-to-add-libraries-path-to-the-configure-command) 
+$SCRATCH/program/ark ]$ ./configure --prefix=$SCRATCH/program/ark && make install 
+
+## for draft genome fasta.gz can't be read, need to be unzip to fa 
+$SCRATCH/tsgenome/data/tswallow_supernova_outs]$ gzip -d tswallow_supernova.pseudohap2.1.fasta.gz > tswallow_supernova.pseudohap2.1.fa  ## decompress tswallow haploid 1 for running ark
+
+$SCRATCH/tsgenome/data/tswallow_supernova_outs]$ ln -s $SCRATCH/tsgenome/data/tigmint_test_out/supernova_hap1.tigmint.fa $SCRATCH/tsgenome/data/ark_out/supernova_hap1.tigmint.fa
+
+$SCRATCH/tsgenome/data/tswallow_supernova_outs]$ ln -s $SCRATCH/tsgenome/data/raw/NewFastq/outs/barcoded.fastq.gz /home/chiyents/myfolder/tsgenome/data/ark_out/barcoded_reads.fq.gz
+
+Then you are all set to run arklinks_tigmint_0.sh
+
+
+
