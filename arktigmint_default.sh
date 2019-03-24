@@ -13,10 +13,10 @@
 #Load modules required
 module unload python
 module load anaconda3
-module load python3
 module load bedtools bwa samtools
 #Load conda env for tigmint 
 source activate /home/chiyents/.conda/envs/ark-env
+module load gcc
 #Load zsh to fix tigmint 
 export PATH=/home/chiyents/zsh-5.7.1/bin:$PATH
 #Load LINKS
@@ -24,6 +24,10 @@ export PATH=/pylon5/mc5fs2p/chiyents/program/links_v1.8.6:$PATH
 #Load ARKS
 export PATH=/pylon5/mc5fs2p/chiyents/program/arks:$PATH
 export PATH=/pylon5/mc5fs2p/chiyents/program/arks/PATH/bin:$PATH
+
+#fix gcc version
+LD_LIBRARY_PATH=/opt/packages/gcc/8.2.0/lib64
+export LD_LIBRARY_PATH
 
 draft="/pylon5/mc5fs2p/chiyents/tsgenome/data/ark_out/supernova_hap1.fa"
 reads="/pylon5/mc5fs2p/chiyents/tsgenome/data/ark_out/barcoded_reads.fq.gz"
