@@ -48,23 +48,29 @@ zsh 5.7.1 (x86_64-pc-linux-gnu)
 
 ## install LINKS (https://github.com/bcgsc/LINKS)
 program]$ wget http://www.bcgsc.ca/platform/bioinfo/software/links/releases/1.8.6/links_v1-8-6.tar.gz
-program]$ tar -xvf links_v1-8-6.tar
+program]$ tar -xvzf links_v1-8-6.tar
 program/links_v1.8.6/lib/bloomfilter/swig]$ 
+
 
 ## TO BUILD a Perl5 module (run in swig/):
 $ module load swig/3.0.8 
-program/links_v1.8.6/lib/bloomfilter/swig]$ preinst-swig -Wall -c++ -perl5 BloomFilter.i
+$ module list
+Currently Loaded Modulefiles:
+  1) psc_path/1.1    2) slurm/default   3) intel/19.3      4) xdusage/2.1-1   5) swig/3.0.8
+
+program/links_v1.8.6/lib/bloomfilter/swig]$ swig -Wall -c++ -perl5 BloomFilter.i
 program/links_v1.8.6/lib/bloomfilter/swig]$ g++ -c BloomFilter_wrap.cxx -I/usr/lib64/perl5/CORE -fPIC -Dbool=char -O3
 program/links_v1.8.6/lib/bloomfilter/swig]$ g++ -Wall -shared BloomFilter_wrap.o -o BloomFilter.so -O3
 
 ## verify installation 
 program/links_v1.8.6/lib/bloomfilter/swig]$ ./test.pl
 
-## Important: you need to change PATH in the following files 
+## Important: you need to change PATH in the following files ( two in /links_v1.8.6/tools and one in /links_v1.8.6)
 ##CHANGE the path to BloomFilter.pm in 
-## /pylon5/mc5fs2p/chiyents/program/links_v1.8.6/LINKS
-## /pylon5/mc5fs2p/chiyents/program/links_v1.8.6/lib/bloomfilter/swig/writeBloom.pl
-## and /pylon5/mc5fs2p/chiyents/program/links_v1.8.6/lib/bloomfilter/swig/testBloom.pl
+## /links_v1.8.6/LINKS
+## /links_v1.8.6/tools/writeBloom.pl
+## and /links_v1.8.6/tools/testBloom.pl
+
 ## nano above three files and replace 
 ## use lib "$FindBin::Bin/./lib/bloomfilter/swig"; (for LINKS) with $SCRATCH/program/links_v1.8.6/lib/bloomfilter/swig
 ## use lib "$FindBin::Bin/../lib/bloomfilter/swig"; (for writeBloom.pl/testBloom.pl) with $SCRATCH/program/links_v1.8.6/lib/bloomfilter/swig
